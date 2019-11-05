@@ -5,8 +5,11 @@ using System;
 public class BloomEffect : MonoBehaviour
 {
 
-    [NonSerialized]
-    Material bloom;
+    const int BoxDownPrefilterPass = 0;
+    const int BoxDownPass = 1;
+    const int BoxUpPass = 2;
+    const int ApplyBloomPass = 3;
+    const int DebugBloomPass = 4;
 
     public Shader bloomShader;
 
@@ -22,22 +25,12 @@ public class BloomEffect : MonoBehaviour
     [Range(0, 1)]
     public float softThreshold = 0.5f;
 
-    [Range(0, 10)]
-    public int widthOffsetThreshold = 0;
-
-    [Range(0, 10)]
-    public int heightOffsetThreshold = 0;
-
-    
-    const int BoxDownPass = 1;
-    const int BoxUpPass = 2;
-    const int BoxDownPrefilterPass = 0;
-    const int ApplyBloomPass = 3;
-    const int DebugBloomPass = 4;
-
     public bool debug;
 
     RenderTexture[] textures = new RenderTexture[16];
+
+    [NonSerialized]
+    Material bloom;
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
@@ -56,8 +49,8 @@ public class BloomEffect : MonoBehaviour
 
         bloom.SetFloat("_Intensity", Mathf.GammaToLinearSpace(intensity));
 
-        int width = source.width / (2 + widthOffsetThreshold);
-        int height = source.height / (2 + heightOffsetThreshold);
+        int width = source.width / 2;
+        int height = source.height / 2;
         RenderTextureFormat format = source.format;
 
         RenderTexture currentDestination = textures[0] =
@@ -71,12 +64,12 @@ public class BloomEffect : MonoBehaviour
             width /= 2;
             height /= 2;
             if (height < 2)
+            {
                 break;
-
-            currentDestination = textures[i] = RenderTexture.GetTemporary(width, height, 0, format);
-
+            }
+            currentDestination = textures[i] =
+                RenderTexture.GetTemporary(width, height, 0, format);
             Graphics.Blit(currentSource, currentDestination, bloom, BoxDownPass);
-
             currentSource = currentDestination;
         }
 
