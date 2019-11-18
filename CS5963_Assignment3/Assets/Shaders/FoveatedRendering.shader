@@ -54,7 +54,7 @@
 					#pragma fragment FragmentProgram
 
 				half4 FragmentProgram(Interpolators i) : SV_Target {
-					if (i.pos.y < _minY || i.pos.y > _maxY) //* 1.75)
+					if (i.pos.y < _minY ||  i.pos.y > _maxY)
 						return tex2D(_MainTex, i.uv) * half4(0,0,.5,0);
 					return tex2D(_MainTex, i.uv);
 				}
@@ -121,7 +121,7 @@
 						);
 						return half4(color, source.a);
 					}
-					else if (i.pos.y > _maxY - 30)
+					else if (i.pos.y > _maxY - 30 && i.pos.x < _minX + _minX * .25f && i.pos.x > _maxX - _minX * .25f)
 					{
 						half frStrength = smoothstep(_maxY, _maxY + _minY * .5f, i.pos.y);
 						half3 color = lerp(
