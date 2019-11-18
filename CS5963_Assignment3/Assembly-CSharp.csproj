@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\DeferredFogEffect.cs" />
     <Compile Include="Assets\Scripts\DepthOfFieldScript.cs" />
     <Compile Include="Assets\Scripts\EmissiveOscillator.cs" />
+    <Compile Include="Assets\Scripts\FoveatedRendering.cs" />
     <Compile Include="Assets\Scripts\GPUInstancingTest.cs" />
     <Compile Include="Assets\Scripts\TangentSpaceVisualizer.cs" />
     <None Include="Assets\Shaders\My Lighting Input.cginc" />
@@ -83,6 +84,7 @@
     <None Include="Assets\Shaders\Bloom.shader" />
     <None Include="Assets\Shaders\DeferredShading.shader" />
     <None Include="Assets\Shaders\My Lightmapping.cginc" />
+    <None Include="Assets\Shaders\FoveatedRendering.shader" />
     <None Include="Assets\Shaders\Bloom 1.shader" />
     <None Include="Assets\Shaders\Flat Wireframe Shader.shader" />
     <None Include="Assets\Shaders\MyTessellation.cginc" />
