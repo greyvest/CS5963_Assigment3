@@ -50,12 +50,12 @@ public class FoveatedRendering : MonoBehaviour
         Graphics.Blit(source, frHalf_1);
 
         // Get 1/4 resolution
-        //Graphics.Blit(frHalf_1, frFourth_1);
+        Graphics.Blit(frHalf_1, frFourth_1);
 
         // back to 1/2 res keeping 1/2 at all but corners
-        //Graphics.Blit(frFourth_1, frHalf_ref);
-        //Graphics.Blit(frHalf_1, frHalf_2, FRMaterial, 4);  // Horizotnal pass
-        //Graphics.Blit(frHalf_2, frHalf_1, FRMaterial, 5);  // Vertical pass
+        Graphics.Blit(frFourth_1, frHalf_ref);
+        Graphics.Blit(frHalf_1, frHalf_2, FRMaterial, 4);  // Horizotnal pass
+        Graphics.Blit(frHalf_2, frHalf_1, FRMaterial, 5);  // Vertical pass
 
         // For Visual Sake, add colors
         //Graphics.Blit(frHalf_1, frHalf_2, FRMaterial, 0);
