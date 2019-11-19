@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c1ecef9ccf2996c448c80200876c5376
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - FRShader_Low: {fileID: 4800000, guid: 5584dcf7a8537b64eb2ba39d4e4202d6, type: 3}
+  - FRShader_Medium: {fileID: 4800000, guid: fa642851d6f0cb140a36d2535c7e50c0, type: 3}
+  - FRShader_High: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
