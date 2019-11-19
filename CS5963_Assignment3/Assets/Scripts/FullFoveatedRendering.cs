@@ -21,13 +21,20 @@ public class FullFoveatedRendering : MonoBehaviour {
     [NonSerialized]
     Material FRMaterial_High;
 
-    int CurrentMode = 3;
+    int CurrentMode = 1;
 
     float xPercent = .1f;
     float yPercent = .1f;
 
+    bool Disabled = false;
+
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        if (Disabled)
+        {
+            Graphics.Blit(source, destination);
+            return;
+        }
 
         // Low
         if (CurrentMode == 0)
@@ -348,10 +355,6 @@ public class FullFoveatedRendering : MonoBehaviour {
             RenderTexture.ReleaseTemporary(frEighth_V);
             RenderTexture.ReleaseTemporary(frEighth_Ref);
         }
-        else if (CurrentMode == 3)
-        {
-            Graphics.Blit(source, destination);
-        }
     }
 
     private void Update()
@@ -370,7 +373,7 @@ public class FullFoveatedRendering : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.F))
         {
-            CurrentMode = 3;
+            Disabled = !Disabled;
         }
     }
 }

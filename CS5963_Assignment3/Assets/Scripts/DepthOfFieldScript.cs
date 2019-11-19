@@ -19,6 +19,8 @@ public class DepthOfFieldScript: MonoBehaviour
     [Range(1f, 10f)]
     public float bokehRadius = 4f;
 
+    bool Disabled = false;
+
     const int circleOfConfusionPass = 0;
     const int preFilterPass = 1;
     const int bokehPass = 2;
@@ -27,6 +29,13 @@ public class DepthOfFieldScript: MonoBehaviour
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        if (Disabled)
+        {
+            Graphics.Blit(source, destination);
+            return;
+        }
+
+
         if (dofMaterial == null)
         {
             dofMaterial = new Material(dofShader);
@@ -59,5 +68,13 @@ public class DepthOfFieldScript: MonoBehaviour
         RenderTexture.ReleaseTemporary(coc);
         RenderTexture.ReleaseTemporary(dof0);
         RenderTexture.ReleaseTemporary(dof1);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Disabled = !Disabled;
+        }
     }
 }

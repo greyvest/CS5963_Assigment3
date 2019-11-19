@@ -1372,6 +1372,7 @@ GameObject:
   - component: {fileID: 1990151261}
   - component: {fileID: 1990151260}
   - component: {fileID: 1990151263}
+  - component: {fileID: 1990151264}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1459,6 +1460,22 @@ MonoBehaviour:
   FRShader_Low: {fileID: 4800000, guid: 5584dcf7a8537b64eb2ba39d4e4202d6, type: 3}
   FRShader_Medium: {fileID: 4800000, guid: fa642851d6f0cb140a36d2535c7e50c0, type: 3}
   FRShader_High: {fileID: 4800000, guid: ad2e360c4003be84c8c7cfc62f12b9d0, type: 3}
+--- !u!114 &1990151264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990151259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d094a57ab46f4a04abfa68d24eef6fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dofShader: {fileID: 4800000, guid: 02692d02ed2b70844a7b7027c1549d0a, type: 3}
+  focusDistance: 40.7
+  focusRange: 68.6
+  bokehRadius: 4.07
 --- !u!1 &2052538892
 GameObject:
   m_ObjectHideFlags: 0
