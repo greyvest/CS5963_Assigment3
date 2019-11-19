@@ -1371,7 +1371,6 @@ GameObject:
   - component: {fileID: 1990151262}
   - component: {fileID: 1990151261}
   - component: {fileID: 1990151260}
-  - component: {fileID: 1990151264}
   - component: {fileID: 1990151263}
   m_Layer: 0
   m_Name: Main Camera
@@ -1438,13 +1437,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990151259}
-  m_LocalRotation: {x: 0.12904036, y: -0.69857794, z: 0.12784262, w: 0.6920938}
-  m_LocalPosition: {x: 32.4, y: 35.1, z: -1.7}
+  m_LocalRotation: {x: 0.11623203, y: -0.711736, z: 0.16268817, w: 0.6733904}
+  m_LocalPosition: {x: 36, y: 12.9, z: -4.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.93, y: -90.57201, z: -0.20400001}
+  m_LocalEulerAnglesHint: {x: 22.838001, y: -92.497, z: 3.3370001}
 --- !u!114 &1990151263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,19 +1459,6 @@ MonoBehaviour:
   FRShader_Low: {fileID: 4800000, guid: 5584dcf7a8537b64eb2ba39d4e4202d6, type: 3}
   FRShader_Medium: {fileID: 4800000, guid: fa642851d6f0cb140a36d2535c7e50c0, type: 3}
   FRShader_High: {fileID: 4800000, guid: ad2e360c4003be84c8c7cfc62f12b9d0, type: 3}
---- !u!114 &1990151264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990151259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2de5a953b917d4086211cd49b2eeaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FRShader: {fileID: 4800000, guid: 477a588bfde1fe44aa50581e89df5472, type: 3}
 --- !u!1 &2052538892
 GameObject:
   m_ObjectHideFlags: 0
