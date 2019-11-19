@@ -145,7 +145,7 @@
 					half3 color = lerp(source.rgb, fr.rgb, frStrength + fr.a - frStrength * fr.a);
 					return half4(color, source.a);
 				}
-				else if (i.pos.y <= _minY_2 && ((i.pos.x >= _minX_2 && i.pos.x <= _minX_2 * 2) || (i.pos.x >= _maxX_1 - _minX_2 && i.pos.x <= _maxX_1))
+				else if (i.pos.y <= _minY_2 && ((i.pos.x >= _minX_2 && i.pos.x <= _minX_2 * 2) || (i.pos.x >= _maxX_1 - _minX_2 && i.pos.x <= _maxX_1)))
 				{
 					half frStrength = smoothstep(_minY_2 * .5f, _minY_2, i.pos.y);
 					half3 color = lerp(source.rgb, fr.rgb, frStrength + fr.a - frStrength * fr.a);
@@ -197,9 +197,15 @@
 			{
 				half4 source = tex2D(_MainTex, i.uv);
 				half4 fr = tex2D(_frTex, i.uv);
-				if (i.pos.y >= _maxY_1 && (i.pos.x >= _maxX_1 || i.pos.X <= _minX_2))
+				if (i.pos.y >= _minY_1 && (i.pos.x <= _minX_2 || i.pos.x >= _maxX_1))
 				{
 					half frStrength = smoothstep(_maxY_1 + (_maxY_2 - _maxY_1) / 2, _maxY_1, i.pos.y);
+					half3 color = lerp(source.rgb, fr.rgb, frStrength + fr.a - frStrength * fr.a);
+					return half4(color, source.a);
+				}
+				else if (i.pos.y <= _minY_2 && i.pos.x >= _minX_2 && i.pos.x <= _maxX_1)
+				{
+					half frStrength = smoothstep(_minY_2 * .5f, _minY_2, i.pos.y);
 					half3 color = lerp(source.rgb, fr.rgb, frStrength + fr.a - frStrength * fr.a);
 					return half4(color, source.a);
 				}
@@ -211,3 +217,4 @@
 			ENDCG
 		}
 					}
+}

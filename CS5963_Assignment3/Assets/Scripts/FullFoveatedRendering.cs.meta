@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - FRShader_Low: {fileID: 4800000, guid: 5584dcf7a8537b64eb2ba39d4e4202d6, type: 3}
   - FRShader_Medium: {fileID: 4800000, guid: fa642851d6f0cb140a36d2535c7e50c0, type: 3}
-  - FRShader_High: {instanceID: 0}
+  - FRShader_High: {fileID: 4800000, guid: ad2e360c4003be84c8c7cfc62f12b9d0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
