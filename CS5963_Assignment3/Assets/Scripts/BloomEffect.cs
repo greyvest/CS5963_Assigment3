@@ -32,65 +32,78 @@ public class BloomEffect : MonoBehaviour
     [NonSerialized]
     Material bloom;
 
+    bool bBool = true;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            bBool = !bBool;
+        }
+    }
+
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        if (bloom == null)
+        if (bBool)
         {
-            bloom = new Material(bloomShader);
-            bloom.hideFlags = HideFlags.HideAndDontSave;
-        }
-
-        float knee = threshold * softThreshold;
-        Vector4 filter;
-        filter.x = threshold;
-        filter.y = filter.x - knee;
-        filter.z = 2f * knee;
-        filter.w = 0.25f / (knee + 0.00001f);
-
-        bloom.SetFloat("_Intensity", Mathf.GammaToLinearSpace(intensity));
-
-        int width = source.width / 2;
-        int height = source.height / 2;
-        RenderTextureFormat format = source.format;
-
-        RenderTexture currentDestination = textures[0] =
-            RenderTexture.GetTemporary(width, height, 0, format);
-        Graphics.Blit(source, currentDestination, bloom, BoxDownPrefilterPass);
-        RenderTexture currentSource = currentDestination;
-
-        int i = 1;
-        for (; i < iterations; i++)
-        {
-            width /= 2;
-            height /= 2;
-            if (height < 2)
+            if (bloom == null)
             {
-                break;
+                bloom = new Material(bloomShader);
+                bloom.hideFlags = HideFlags.HideAndDontSave;
             }
-            currentDestination = textures[i] =
+
+            float knee = threshold * softThreshold;
+            Vector4 filter;
+            filter.x = threshold;
+            filter.y = filter.x - knee;
+            filter.z = 2f * knee;
+            filter.w = 0.25f / (knee + 0.00001f);
+
+            bloom.SetFloat("_Intensity", Mathf.GammaToLinearSpace(intensity));
+
+            int width = source.width / 2;
+            int height = source.height / 2;
+            RenderTextureFormat format = source.format;
+
+            RenderTexture currentDestination = textures[0] =
                 RenderTexture.GetTemporary(width, height, 0, format);
-            Graphics.Blit(currentSource, currentDestination, bloom, BoxDownPass);
-            currentSource = currentDestination;
-        }
+            Graphics.Blit(source, currentDestination, bloom, BoxDownPrefilterPass);
+            RenderTexture currentSource = currentDestination;
 
-        for (i -= 2; i >= 0; i--)
-        {
-            currentDestination = textures[i];
-            textures[i] = null;
-            Graphics.Blit(currentSource, currentDestination, bloom, BoxUpPass);
+            int i = 1;
+            for (; i < iterations; i++)
+            {
+                width /= 2;
+                height /= 2;
+                if (height < 2)
+                {
+                    break;
+                }
+                currentDestination = textures[i] =
+                    RenderTexture.GetTemporary(width, height, 0, format);
+                Graphics.Blit(currentSource, currentDestination, bloom, BoxDownPass);
+                currentSource = currentDestination;
+            }
+
+            for (i -= 2; i >= 0; i--)
+            {
+                currentDestination = textures[i];
+                textures[i] = null;
+                Graphics.Blit(currentSource, currentDestination, bloom, BoxUpPass);
+                RenderTexture.ReleaseTemporary(currentSource);
+                currentSource = currentDestination;
+            }
+
+            if (debug)
+            {
+                Graphics.Blit(currentSource, destination, bloom, DebugBloomPass);
+            }
+            else
+            {
+                bloom.SetTexture("_SourceTex", source);
+                Graphics.Blit(currentSource, destination, bloom, ApplyBloomPass);
+            }
             RenderTexture.ReleaseTemporary(currentSource);
-            currentSource = currentDestination;
         }
-
-        if (debug)
-        {
-            Graphics.Blit(currentSource, destination, bloom, DebugBloomPass);
-        }
-        else
-        {
-            bloom.SetTexture("_SourceTex", source);
-            Graphics.Blit(currentSource, destination, bloom, ApplyBloomPass);
-        }
-        RenderTexture.ReleaseTemporary(currentSource);
     }
 }
